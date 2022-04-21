@@ -24,16 +24,14 @@ class SettingRequest extends FormRequest
     public function rules()
     {
         return [
-
-            'site_name' => 'required|string|max:191',
-            'address' => 'nullable|string|max:191',
-            'location' => 'nullable|url|max:191',
-            'copyright' => 'required|string|max:191',
-            'copyright_link_text' => 'nullable|string|max:191',
-            'copyright_link' => 'nullable|url|max:191',
-            'sm_description' => 'required|string|max:191',
+            'site_name_ar' => 'required|string|max:191',
+            'site_name_en' => 'required|string|max:191',
             'phone' => 'required|max:191|min:10|regex:/^([0-9\s\-\+\(\)]*)$/',
             'email' => 'required|string|email|max:191',
+            'logo' => 'nullable|mimes:jpeg,jpg,png',
+            'login_pg' => 'nullable|mimes:jpeg,jpg,png',
+            'logo_login' => 'nullable|mimes:jpeg,jpg,png',
+            'location' => 'nullable|url|max:191',
             'facebook' => 'nullable|url|max:191',
             'twitter' => 'nullable|url|max:191',
             'instagram' => 'nullable|url|max:191',
@@ -41,8 +39,24 @@ class SettingRequest extends FormRequest
             'pinterest' => 'nullable|url|max:191',
             'youtube' => 'nullable|url|max:191',
             'telegram' => 'nullable|url|max:191',
-            'logo' => 'nullable|mimes:jpeg,jpg,png',
-            'login_pg' => 'nullable|mimes:jpeg,jpg,png',
+            'address_ar' => 'nullable|string|max:191',
+            'address_en' => 'nullable|string|max:191',
+            'sm_description_ar' => 'required|string|max:191',
+            'sm_description_en' => 'required|string|max:191',
+            'copyright' => 'required|string|max:191',
+            'copyright_link_text' => 'nullable|string|max:191',
+            'copyright_link' => 'nullable|url|max:191',
+            'terms_ar'=>'nullable|max:1000',
+            'terms_en'=>'nullable|max:1000',
+            'privacy_ar'=>'nullable|max:1000',
+            'privacy_en'=>'nullable|max:1000',
+            'usage_ar'=>'nullable|max:1000',
+            'usage_en'=>'nullable|max:1000',
+            'about_ar'=>'nullable|max:1000',
+            'about_en'=>'nullable|max:1000',
+            'delivery_cost'=>'nullable|numeric',
+            'cash_on_delivery'=>'nullable|numeric',
+
         ];
     }
 }

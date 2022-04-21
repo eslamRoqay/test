@@ -1,6 +1,0 @@
-@include('userLayouts.userHeader')
-@include('userLayouts.userSidebar')
-@include('userLayouts.messages')
-@include('userLayouts.errors')
-@yield('content')
-@include('userLayouts.userFooter')

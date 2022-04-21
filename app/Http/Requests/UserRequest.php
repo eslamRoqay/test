@@ -36,7 +36,8 @@ class UserRequest extends FormRequest
             ],
             'phone' => [
                 'required',
-                'regex:/[0-9]{11}/',
+                'regex:/^([0-9\s\-\+\(\)]*)$/',
+                'max:14',
                 Rule::unique('users', 'phone')->ignore($this->route('id'))
             ],
             'password' => [

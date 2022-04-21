@@ -8,7 +8,7 @@ use App\Http\Controllers\GeneralController;
 use App\Http\Requests\AdminRequest;
 use App\Http\Requests\General\MultiDelete;
 use App\Models\Admin;
-use App\RepositoryEloquent\AdminRepoEleq;
+use App\Repositories\Contracts\IAdminRepository;
 use Illuminate\Support\Facades\DB;
 use Spatie\Permission\Models\Role;
 
@@ -18,8 +18,7 @@ class AdminController extends GeneralController
     protected $path = 'admins';
     private $route = 'admins';
 
-
-    public function __construct(AdminRepoEleq $model)
+    public function __construct(IAdminRepository $model)
     {
         $this->model = $model;
     }
@@ -30,10 +29,12 @@ class AdminController extends GeneralController
         return $dataTable->render('dashboard.admin.index');
     }
 
+
     private function roles()
     {
-        return $this->model->roles();
+        return Role::get();
     }
+
 
     /**
      * View Page Add New Data
@@ -41,25 +42,28 @@ class AdminController extends GeneralController
      */
     public function create()
     {
-        // Get Roles
         $roles = $this->roles();
         return view($this->viewPath($this->viewPath . 'create'), compact('roles'));
     }
 
     public function store(AdminRequest $request)
     {
+
         $inputs = $request->validated();
         DB::beginTransaction();
-        $admin = $this->model->store($inputs);
+        $admin = $this->model->create($inputs);
         $admin->assignRole($request->input('role_id'));
         DB::commit();
         return redirect()->route($this->route)->with('success', 'تم الاضافه بنجاح');
 
     }
 
+
     public function edit($id)
     {
-        $data = $this->model->edit($id);
+        // Get and Check Data
+        $data = $this->model->find($id);
+        // Get Roles
         $roles = $this->roles();
         return view($this->viewPath($this->viewPath . 'edit'), compact('data', 'roles'));
     }
@@ -67,14 +71,19 @@ class AdminController extends GeneralController
 
     public function update(AdminRequest $request, $id)
     {
+        // Get and Check Data
+        $data = $this->model->find($id);
+        // Get data from request
         $inputs = $request->validated();
+        // Set Password if exist inputs data
         if (!empty($request->input('password'))) {
-
+//            $inputs['password'] = bcrypt($request->input('password'));
         } else {
             unset($inputs['password']);
         }
         DB::beginTransaction();
-        $this->model->update($id, $inputs);
+        $data->update($inputs);
+        // Assign Roles
         DB::table('model_has_roles')->where('model_id', $id)->update(['role_id' => $request['role_id']]);
         DB::commit();
         return redirect()->route($this->route)->with('success', 'تم الاضافه بنجاح');
@@ -84,34 +93,40 @@ class AdminController extends GeneralController
 
     public function delete($id)
     {
-
-        if (($id == '1')) {
+        // Get and Check Data
+        $data = $this->model->find($id);
+        // Check If User Delete Yourself
+        if (($data->id == '1')) {
             return redirect()->route($this->route)->with('danger', 'لا يمكن حذف مدير الموقع');
         }
-
         DB::table('model_has_roles')->where('model_id', $id)->delete();
         // Delete Data from DB
-        $this->model->delete($id);
+        $data->delete();
         return redirect()->route($this->route)->with('success', 'تم الحذف بنجاح');
 
     }
 
     public function deletes(MultiDelete $request)
     {
-
         try {
+            // Get Inputs Data From Request
             $data = $request->validated();
-            $items = Admin::whereIn('id', $data['data']);
+            // Get Items Selected
+            $items = $this->model->whereIn('id', $data['data']);
+            // Check If Not Have Count Items Or Check If User Delete Yourself
             if (!$items->count()) {
                 return redirect()->back()->with('danger', 'يجب اختيار عنصر علي الافل');
+
             }
             if ((in_array(1, $data['data']))) {
                 return redirect()->back()->with('danger', 'لا يمكنك حذف الادمن');
-            }
-            $this->model->deletes($data);
-            return redirect()->back()->with('success', 'تم الحذف بنجاح');
 
+            }
+            // Get & Delete Data Selected
+            $items->delete();
+            return redirect()->back()->with('success', 'تم الحذف بنجاح');
         } catch (\Exception $e) {
+
             return redirect()->back()->with('danger', 'لا يمكنك الحذف');
         }
     }

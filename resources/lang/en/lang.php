@@ -1,16 +1,35 @@
 <?php
 
 return [
-
+    'language' => 'language',
     'profile' => 'profile',
     'statuschanged' => 'status changed successfully',
     'you_are_not_active' => 'you are not active , contact admin to active your account',
-    'data_created_successfully'=>'data created successfully',
-    'data_show_successfully'=>'data show successfully',
-    'some_records_required'=>'validation Error',
-    'data_deleted_successfully'=>'data deleted successfully',
-    'data_updated_successfully'=>'data updated successfully',
-    'cant_delete_address'=>'data delete successfully',
+    'data_created_successfully' => 'data created successfully',
+    'data_show_successfully' => 'data show successfully',
+    'some_records_required' => 'validation Error',
+    'data_deleted_successfully' => 'data deleted successfully',
+    'data_updated_successfully' => 'data updated successfully',
+    'cant_delete_address' => 'data delete successfully',
+    'brand_products' => 'brand products',
+    'brands' => 'brands',
+    'sliders' => 'sliders',
+    'cities' => 'cities',
+    'coupons' => 'coupons',
+    'data_sent_successfully' => 'message sent successfully',
+    'user_successfully_registered' => 'user successfully registered',
+    'user_profile_updated_successfully' => 'user profile updated successfully',
+    'code_sent_to_email_successfully' => 'code sent to email successfully',
+    'login_s' => 'you are login successfully',
+    'logout_s' => 'User successfully logged out.',
+    'login_data_not_correct' => 'login data not correct',
+    'should_send_valid_id' => 'you should send valid data',
 
-
+    //sidebar
+    'home' => 'Home',
+    'users' => 'Users',
+    'admins' => 'Admins',
+    'inboxes' => 'Inbox',
+    'roles' => 'Roles',
+    'settings' => 'Settings',
 ];

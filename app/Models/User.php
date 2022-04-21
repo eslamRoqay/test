@@ -25,9 +25,7 @@ protected $guarded=[];
      * @var array
      */
     protected $hidden = [
-        'password',
-        'created_at',
-        'updated_at'
+        'password', 'remember_token'
     ];
 
     /**
@@ -59,4 +57,5 @@ protected $guarded=[];
             $this->attributes['password'] = bcrypt($password);
         }
     }
+
 }

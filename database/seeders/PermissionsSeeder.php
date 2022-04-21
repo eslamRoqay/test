@@ -16,56 +16,20 @@ class PermissionsSeeder extends Seeder
     {
         $data = [
 
-            // shifts permissions
+            // inboxes permissions
             [
-                'path' => 'shifts',
-                'name' => 'read-shifts',
-                'display_name' => 'read shifts',
-                'description' => 'عرض الدوام',
+                'path' => 'inboxes',
+                'name' => 'read-inboxes',
+                'display_name' => 'read inboxes',
+                'description' => 'عرض الرسائل',
             ],
             [
-                'path' => 'shifts',
-                'name' => 'update-shifts',
-                'display_name' => 'update shifts',
-                'description' => 'تعديل الدوام',
+                'path' => 'inboxes',
+                'name' => 'delete-inboxes',
+                'display_name' => 'delete inboxes',
+                'description' => 'حذف الرسائل',
             ],
-            [
-                'path' => 'shifts',
-                'name' => 'create-shifts',
-                'display_name' => 'create shifts',
-                'description' => 'إضافة الدوام',
-            ],
-            [
-                'path' => 'shifts',
-                'name' => 'delete-shifts',
-                'display_name' => 'delete shifts',
-                'description' => 'مسح الدوام',
-            ],
-            // pharmacies permissions
-            [
-                'path' => 'pharmacies',
-                'name' => 'read-pharmacies',
-                'display_name' => 'read pharmacies',
-                'description' => 'عرض الصيدليات',
-            ],
-            [
-                'path' => 'pharmacies',
-                'name' => 'update-pharmacies',
-                'display_name' => 'update pharmacies',
-                'description' => 'تعديل الصيدليات',
-            ],
-            [
-                'path' => 'pharmacies',
-                'name' => 'create-pharmacies',
-                'display_name' => 'create pharmacies',
-                'description' => 'إضافة الصيدليات',
-            ],
-            [
-                'path' => 'pharmacies',
-                'name' => 'delete-pharmacies',
-                'display_name' => 'delete pharmacies',
-                'description' => 'مسح الصيدليات',
-            ],
+
             // users permissions
             [
                 'path' => 'users',
@@ -89,7 +53,7 @@ class PermissionsSeeder extends Seeder
                 'path' => 'users',
                 'name' => 'delete-users',
                 'display_name' => 'delete users',
-                'description' => 'مسح العملاء',
+                'description' => 'حذف العملاء',
             ],
             // settings permissions
             [
@@ -128,7 +92,7 @@ class PermissionsSeeder extends Seeder
                 'path' => 'roles',
                 'name' => 'delete-roles',
                 'display_name' => 'delete roles',
-                'description' => 'مسح الصلاحيات',
+                'description' => 'حذف الصلاحيات',
             ],
             // admins permissions
             [
@@ -153,11 +117,11 @@ class PermissionsSeeder extends Seeder
                 'path' => 'admins',
                 'name' => 'delete-admins',
                 'display_name' => 'delete admins',
-                'description' => 'مسح المديرين',
+                'description' => 'حذف المديرين',
             ],
+
+
         ];
-
-
         foreach ($data as $get) {
             Permission::updateOrCreate($get);
         }

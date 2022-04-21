@@ -16,7 +16,7 @@ License: You must have a valid license purchased only from themeforest(the above
 <!--begin::Head-->
 <head><base href="../../../../">
     <meta charset="utf-8" />
-    <title>{{settings('site_name')}}</title>
+    <title>{{settings('site_name_ar')}}</title>
     <meta name="description" content="Singin page example" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <link rel="canonical" href="https://keenthemes.com/metronic" />
@@ -67,13 +67,11 @@ License: You must have a valid license purchased only from themeforest(the above
                     <!--begin::Title-->
                         <div class="pb-5 pb-lg-15" style="text-align: center;">
                             <h3 class="font-weight-bolder text-success font-size-h2 font-size-h1-lg">تسجيل الدخول</h3>
-                            <a href="{{url('/login')}}" ><span class="text-danger  " >تسجيل الدخول الموظفين </span></a>
-
                         </div>
                         <!--begin::Title-->
                         <!--begin::Form group-->
                         <div class="form-group">
-                            <label class="font-size-h6 font-weight-bolder text-dark">       البريد الالكتروني     <span class="text-danger  " >admin@admin.com</span> </label>
+                            <label class="font-size-h6 font-weight-bolder text-dark">البريد الالكتروني</label>
                             <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg border-0" type="email" name="email" autocomplete="off" />
                         </div>
                         @error('email')
@@ -83,7 +81,7 @@ License: You must have a valid license purchased only from themeforest(the above
                         <!--begin::Form group-->
                         <div class="form-group">
                             <div class="d-flex justify-content-between mt-n5">
-                                <label class="font-size-h6 font-weight-bolder text-dark pt-5">الرقم السري   <span class="text-danger  " >123456</span></label>
+                                <label class="font-size-h6 font-weight-bolder text-dark pt-5">الرقم السري</label>
                             </div>
                             <input class="form-control form-control-solid h-auto py-7 px-6 rounded-lg border-0" type="password" name="password" autocomplete="off" />
                         </div>
@@ -105,8 +103,8 @@ License: You must have a valid license purchased only from themeforest(the above
         </div>
         <!--begin::Content-->
         <!--begin::Aside-->
-        <div class="login-aside order-1 order-lg-2 bgi-no-repeat bgi-position-x-right" style="background-image: url({{asset(settings('login_pg'))}});  background-repeat: no-repeat; width:700px;">
-
+        <div class="login-aside order-1 order-lg-2 bgi-no-repeat bgi-position-x-right" style="background-image: url({{asset(settings('login_pg'))}}); width: 750px;  background-repeat: no-repeat;
+            background-size: auto;">
         </div>
         <!--end::Aside-->
     </div>

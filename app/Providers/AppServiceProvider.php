@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\ServiceProvider;
 
@@ -24,9 +25,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if($this->app->environment('production')) {
-            \URL::forceScheme('https');
-        }
+        Paginator::useBootstrap();
+        //for make api language make changes in system language
         $languages = ['ar', 'en'];
         $lang = request()->header('lang');
         if ($lang) {

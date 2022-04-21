@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers\Dashboard;
 
+
 use App\Http\Controllers\Controller;
-use App\Models\Admin;
-use App\Models\Pharmacy;
 use App\Models\User;
-use Spatie\Permission\Models\Role;
 use function view;
 
 class HomeController extends Controller
@@ -28,10 +26,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $data['users'] = User::get()->count();
-        $data['pharmacies'] = Pharmacy::get()->count();
-        $data['admins'] = Admin::get()->count();
-        $data['roles'] = Role::get()->count();
-        return view('dashboard.home',compact('data'));
+        $data['customers'] = User::get()->count();
+        $newest_customers = User::orderBy('created_at', 'desc')->take(5)->get();
+        return view('home',compact('data','newest_customers'));
     }
 }

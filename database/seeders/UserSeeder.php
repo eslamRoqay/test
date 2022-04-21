@@ -14,13 +14,6 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $user = User::create([
-            'name' => 'admin',
-            'email' => 'customer@demo.com',
-            'phone' => '010000000000',
-            'lat' => 'aaaa aaa aaa',
-            'lng' => 'aaaa aaa aaa',
-            'password' => '123456',
-        ]);
+        User::factory()->count(10000)->create();
     }
 }

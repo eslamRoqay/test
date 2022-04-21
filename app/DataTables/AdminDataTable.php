@@ -36,7 +36,7 @@ class AdminDataTable extends DataTable
      */
     public function query(Admin $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->orderBy('created_at','desc');
     }
 
     /**
@@ -50,14 +50,15 @@ class AdminDataTable extends DataTable
             ->setTableId('admin-table')
             ->columns($this->getColumns())
             ->minifiedAjax()
-            ->orderBy(0,'desc')
+            ->orderBy(0)
             ->lengthMenu(
                 [
                     [10, 25, 50, -1],
                     ['10 صـفوف', '25 صـف', '50 صـف', 'كل الصـفوف']
                 ])
             ->parameters([
-                'language' => ['url' => '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Arabic.json']
+                'language' => [ app()->getLocale()=='en' ? : 'url' => '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Arabic.json']
+
             ]);
     }
 

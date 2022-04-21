@@ -11,6 +11,7 @@ use Intervention\Image\Facades\Image;
 class GeneralController extends Controller
 {
 
+    public $model;
     protected $view = 'dashboard.';
     protected $url = 'dashboard/';
     protected $frontView = 'front.';
@@ -36,28 +37,33 @@ class GeneralController extends Controller
         return $this->url . $url;
     }
 
+    public function getData()
+    {
+        return $this->model->orderBy('id', 'DESC');
+    }
+
+    public function withOutHide()
+    {
+        return $this->model->where('hide', 0);
+    }
+
+    public function slug($string, $separator = '-')
+    {
+        $string = trim($string);
+        $string = mb_strtolower($string, 'UTF-8');
+        $string = preg_replace("/[^a-z0-9_\-\sءاآؤئبپتثجچحخدذرزژسشصضطظعغفقكکگلمنوهيیةى]/u", '', $string);
+        $string = preg_replace("/[\s\-_]+/", ' ', $string);
+        $string = preg_replace("/[\s_]/", $separator, $string);
+        return $string;
+    }
+
+    public function slugItem($slug)
+    {
+        return $this->model->where('hide', 0)->where('slug', $slug);
+    }
 
 
-    /*************************************
-    End Quires Get Data
-     ************************************/
 
-
-    /*************************************
-    Start Uploading Files
-     ************************************/
-    /**
-     * Uploading Image
-     * @param $file
-     * @param $path
-     * @param null $oldFile
-     * @param int|null $width
-     * @param int|null $height
-     * @param int|null $thumbnailWidth
-     * @param int|null $thumbnailHeight
-     * @param bool $watermark
-     * @return |null
-     */
     public function uploadImage($file, $path, $oldFile = null, int $width = null, int $height = null, int $thumbnailWidth = null, int $thumbnailHeight = null, bool $watermark = false)
     {
         if($file) {
@@ -128,116 +134,7 @@ class GeneralController extends Controller
         // Save Thumbnail Image in Path Thumbnail
         $thumbnailImage->save($fullThumbnailPath, $this->quality, $this->encode);
     }
-    /*************************************
-    End Uploading Files
-     ************************************/
 
-
-
-    /*************************************
-    Start Validation
-     ************************************/
-    /**
-     * Validation $id in Model
-     * @param $id
-     * @return mixed
-     */
-
-    /*************************************
-    End Validation
-     ************************************/
-
-
-    /*************************************
-    Start Get User Login Guards
-     ************************************/
-
-    /**
-     * Get Admin Logged
-     * @return \Illuminate\Contracts\Auth\Authenticatable|null
-     */
-    public function admin()
-    {
-        return auth('admin')->user();
-    }
-
-    /**
-     * Get Seller Logged
-     * @return \Illuminate\Contracts\Auth\Authenticatable|null
-     */
-    public function seller()
-    {
-        return auth('seller')->user();
-    }
-
-    /**
-     * Get Company Logged
-     * @return \Illuminate\Contracts\Auth\Authenticatable|null
-     */
-    public function user()
-    {
-        return auth()->user();
-    }
-
-    /**
-     * Get User Login APi
-     * @return \Illuminate\Contracts\Auth\Authenticatable|null
-     */
-    public function userApi()
-    {
-        return auth('api')->user();
-    }
-
-    /*************************************
-    Start Get User Login Guards
-     ************************************/
-
-
-
-    /*************************************
-    Start General Functions
-     ************************************/
-    /**
-     * Code Generate
-     * @return string
-     */
-    public function code()
-    {
-        return sha1(uniqid('_m') . md5(date('Ymdhis'))) . md5(uniqid('_m') . sha1(date('Ymdhis')));
-    }
-
-
-    /**
-     * Generate Code
-     * @return string
-     */
-    public function codeGenerate()
-    {
-        return mt_rand(100000, 999999);
-    }
-
-
-    /**
-     * Check Key Generated
-     * @param $field
-     * @return string
-     */
-    public function keyUser($field)
-    {
-        do {
-            $key = $this->codeGenerate();
-            $user = $this->model->where($field, $key)->first();
-        } while($user);
-
-        return $key;
-    }
-
-
-    /**
-     * Delete Images from folders
-     * @param $image
-     * @return bool
-     */
     public function deleteImage($image)
     {
         if($image) {
@@ -342,7 +239,36 @@ class GeneralController extends Controller
     public function InvalidData($statusCode = null)
     {
         return $this->errorResponse(__('lang.invalid_data'), [], $statusCode);
+    }
 
 
-}
+    /**
+     * Validation API Request
+     * @param $id
+     * @return mixed
+     */
+    public function ValidationAPI($id)
+    {
+        // Get data Category
+        $data = $this->model->find($id);
+        // if not exist data Category
+        if(!$data)
+            return $this->InvalidData();
+        return $data;
+    }
+
+
+    /**
+     * Get Specific Item By ID
+     * @param $id
+     * @return mixed
+     */
+    public function GetApiItem($id)
+    {
+        return $this->model->findOrFail($id);
+    }
+    /*************************************
+    End Responses Data Json
+     ************************************/
+
 }

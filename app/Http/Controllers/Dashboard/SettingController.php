@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers\Dashboard;
 
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\GeneralController;
 use App\Http\Requests\SettingRequest;
 use App\Models\Setting;
+use App\Repositories\Contracts\ISettingRepository;
 
 class SettingController extends GeneralController
 {
@@ -16,9 +16,9 @@ class SettingController extends GeneralController
     protected $encode = 'png';
 
 
-    public function __construct(Setting $model)
+    public function __construct(ISettingRepository $model)
     {
-        $this->model=$model;
+        $this->model = $model;
     }
 
 
@@ -28,14 +28,14 @@ class SettingController extends GeneralController
      */
     public function index()
     {
-        $data = $this->model->get();
+        $data = $this->model->all();
         return view($this->viewPath($this->viewPath . 'edit'), compact('data'));
     }
 
 
     public function update(SettingRequest $request)
     {
-        $data = $this->model->get();
+        $data = $this->model->all();
         $inputs = $request->validated();
         if($request->hasFile('logo')) {
             $inputs['logo'] = $this->uploadImage($request->file('logo'), $this->path, $data->where('key', 'logo')->first()->val);
@@ -46,8 +46,8 @@ class SettingController extends GeneralController
         if($request->hasFile('login_pg')) {
             $inputs['login_pg'] = $this->uploadImage($request->file('login_pg'), $this->path, $data->where('key', 'login_pg')->first()->val , null,900);
         }
-        $this->model->setMany($inputs);
-        $this->flash('success','تم التحديث');
-        return back();
+        Setting::setMany($inputs);
+        return redirect()->back()->with('success', 'تم التعديل بنجاح');
+
     }
 }

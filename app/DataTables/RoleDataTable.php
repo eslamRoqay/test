@@ -37,7 +37,7 @@ class RoleDataTable extends DataTable
      */
     public function query(Role $model)
     {
-        return $model->newQuery();
+        return $model->newQuery()->orderBy('created_at','desc');
     }
 
     /**
@@ -58,7 +58,8 @@ class RoleDataTable extends DataTable
                     ['10 صـفوف', '25 صـف', '50 صـف', 'كل الصـفوف']
                 ])
             ->parameters([
-                'language' => ['url' => '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Arabic.json']
+                'language' => [ app()->getLocale()=='en' ? : 'url' => '//cdn.datatables.net/plug-ins/9dcbecd42ad/i18n/Arabic.json']
+
             ]);
     }
 

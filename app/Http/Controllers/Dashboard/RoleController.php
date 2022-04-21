@@ -25,7 +25,7 @@ class RoleController extends GeneralController
 
     public function __construct(Role $model)
     {
-        $this->model=$model;
+        $this->model = $model;
     }
 
     public function index(RoleDataTable $dataTable)
@@ -53,7 +53,7 @@ class RoleController extends GeneralController
     public function edit($id)
     {
         // Get and Check Data
-        $role = Role::find($id);
+        $role = Role::findOrFail($id);
         // Get Permissions
         $permissions = Permission::select('path')->groupBy('path')->get();
 
@@ -67,7 +67,7 @@ class RoleController extends GeneralController
     public function update(RoleRequest $request, $id)
     {
         //update role data
-        $role = Role::find($id);
+        $role = Role::findOrFail($id);
         $role->name = $request->input('name');
         $role->slug = Str::slug($request->input('name'));
         $role->save();

@@ -45,7 +45,8 @@
         <!--begin::Header-->
         <div class="d-flex align-items-center mt-5">
             <div class="symbol symbol-100 mr-5">
-
+                <div class="symbol-label" style="background-image:url('uploads/users/default.png')"></div>
+                <i class="symbol-badge bg-success"></i>
             </div>
             <div class="d-flex flex-column">
                 <a class="font-weight-bold font-size-h5 text-dark-75 text-hover-success">{{auth()->user()->name}}</a>
@@ -55,15 +56,42 @@
                         <span class="navi-text text-muted text-hover-success">{{auth()->user()->email}}</span>
                         </span>
                     </a>
-                    <a href="{{route('admin.logout')}}" class="btn btn-sm btn-light-success font-weight-bolder py-2 px-5">تسجيل
-                        الخروج</a>
+                            <a href="{{route('logout')}}"
+                               class="btn btn-sm btn-light-success font-weight-bolder py-2 px-5">تسجيل
+                                الخروج</a>
+                    <br>
                 </div>
             </div>
         </div>
         <!--end::Header-->
         <!--begin::Separator-->
         <div class="separator separator-dashed mt-8 mb-5"></div>
-
+        <div class="navi navi-spacer-x-0 p-0">
+            <!--begin::Item-->
+            <a href="{{route('admins.edit',auth()->user()->id)}}" class="navi-item">
+                <div class="navi-link">
+                    <div class="symbol symbol-40 bg-light mr-3">
+                        <div class="symbol-label">
+                                    <span class="svg-icon svg-icon-md svg-icon-success">
+                                        <!--begin::Svg Icon | path:assets/media/svg/icons/General/Notification2.svg-->
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
+                                            <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                                <rect x="0" y="0" width="24" height="24" />
+                                                <path d="M13.2070325,4 C13.0721672,4.47683179 13,4.97998812 13,5.5 C13,8.53756612 15.4624339,11 18.5,11 C19.0200119,11 19.5231682,10.9278328 20,10.7929675 L20,17 C20,18.6568542 18.6568542,20 17,20 L7,20 C5.34314575,20 4,18.6568542 4,17 L4,7 C4,5.34314575 5.34314575,4 7,4 L13.2070325,4 Z" fill="#000000" />
+                                                <circle fill="#000000" opacity="0.3" cx="18.5" cy="5.5" r="2.5" />
+                                            </g>
+                                        </svg>
+                                        <!--end::Svg Icon-->
+                                    </span>
+                        </div>
+                    </div>
+                    <div class="navi-text">
+                        <div class="font-weight-bold">الملف الشخصي</div>
+                    </div>
+                </div>
+            </a>
+            <!--end:Item-->
+        </div>
     </div>
     <!--end::Content-->
 </div>
@@ -142,20 +170,20 @@
     };</script>
 <!--end::Global Config-->
 <!--begin::Global Theme Bundle(used by all pages)-->
-<script src="{{asset('/')}}assets/plugins/global/plugins.bundle.js"></script>
-<script src="{{asset('/')}}assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
-<script src="{{asset('/')}}assets/js/scripts.bundle.js"></script>
+<script src="assets/plugins/global/plugins.bundle.js"></script>
+<script src="assets/plugins/custom/prismjs/prismjs.bundle.js"></script>
+<script src="assets/js/scripts.bundle.js"></script>
 <!--end::Global Theme Bundle-->
 <!--begin::Page Vendors(used by this page)-->
-<script src="{{asset('/')}}assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
+<script src="assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
 <script src="//maps.google.com/maps/api/js?key=AIzaSyBTGnKT7dt597vo9QgeQ7BFhvSRP4eiMSM"></script>
-<script src="{{asset('/')}}assets/plugins/custom/gmaps/gmaps.js"></script>
+<script src="assets/plugins/custom/gmaps/gmaps.js"></script>
 <!--end::Page Vendors-->
 <!--begin::Page Scripts(used by this page)-->
-<script src="{{asset('/')}}assets/js/pages/widgets.js"></script>
+<script src="assets/js/pages/widgets.js"></script>
 <!--begin::Page Scripts(used by this page)-->
-<script src="{{asset('/')}}assets/plugins/custom/uppy/uppy.bundle.js"></script>
-<script src="{{asset('/')}}assets/js/pages/crud/file-upload/uppy.js"></script>
+<script src="assets/plugins/custom/uppy/uppy.bundle.js"></script>
+<script src="assets/js/pages/crud/file-upload/uppy.js"></script>
 <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.11.3/js/dataTables.bootstrap4.min.js"></script>
 @yield('script')

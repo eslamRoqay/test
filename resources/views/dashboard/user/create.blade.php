@@ -1,4 +1,4 @@
-@php($title='اضافه موظف')
+@php($title='اضافه عميل')
 @extends('adminLayouts.app')
 @section('title')
     {{$title}}
@@ -15,7 +15,7 @@
             @can('read-users')
             <li class="breadcrumb-item">
                 <a href="{{route('users')}}"
-                   class="text-muted">الموظفين</a>
+                   class="text-muted">العملاء</a>
             </li>
             @endcan
             <li class="breadcrumb-item">

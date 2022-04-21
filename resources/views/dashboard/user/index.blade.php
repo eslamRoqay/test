@@ -1,4 +1,4 @@
-@php($title='الموظفين')
+@php($title='العملاء')
 @extends('adminLayouts.app')
 @section('title')
    {{$title}}
@@ -22,24 +22,30 @@
     </div>
 @endsection
 @section('content')
-
     <div class="card">
-        <div class="text-right">
-        <div class="card-header">
-            @can('create-users')
-
-            <a href="{{route('users.create')}}" class="btn btn-sm btn-light-success font-weight-bolder mr-2">
-                <i class="fa fa-plus"></i>اضـافـه</a>
-            @endcan
-        </div>
-        </div>
         <form action="{{ route('users.deletes') }}" method="post" id="delete-form">
             @csrf
-            @can('delete-users')
-                <button type="submit" style="display:none; margin-right: 10px;" class="btn btn-danger delete-selected-btn"><i class="fa fa-trash"></i> حذف المحدد  </button>
-            @endcan
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-6 text-left">
+                        @can('delete-users')
+                            <button type="submit" style="display:none; margin-right: 10px;"
+                                    class="btn btn-sm btn-light-danger font-weight-bolder mr-2 delete-selected-btn"><i
+                                    class="fa fa-trash"></i> حذف المحدد
+                            </button>
+                        @endcan
+                    </div>
+                    <div class="col-md-6 text-right">
+                        @can('create-users')
+                            <a href="{{route('users.create')}}"
+                               class="btn btn-sm btn-light-success font-weight-bolder mr-2">
+                                <i class="fa fa-plus"></i>اضـافـه</a>
+                        @endcan
+                    </div>
+                </div>
+            </div>
             <div class="card-body">
-            {!! $dataTable->table() !!}
+            {!! $dataTable->table([],true) !!}
         </form>
     </div>
     </div>
@@ -48,5 +54,44 @@
     {!! $dataTable->scripts() !!}
     <script src="assets/js/work.js"></script>
 
+    <script type="text/javascript">
+        function update_active(el) {
+            if (el.checked) {
+                var status = 'active';
+            } else {
+                var status = 'unactive';
+            }
+            $.post('{{ route('users.change_status') }}', {
+                _token: '{{ csrf_token() }}',
+                id: el.value,
+                status: status
+            }, function (data) {
+                if (data == 1) {
+                    toastr.success(".....             {{trans('lang.statuschanged')}}");
+                } else {
+                    toastr.error("{{trans('lang.statuschanged')}}");
+                }
+            });
+        }
+
+        function phonelimit(string) {
+            var first_string = string.substring(0);
+            var int_string = parseInt(first_string);
+            if(int_string == 0){
+                $("#phone").val('');
+                return false;
+            }
+
+            if (string.length < 11) {
+                return string;
+            } else {
+                alert('عفوا رقم الجوال 10 اراقم فقط');
+            }
+        }
+
+        function removeSpaces(string) {
+            return string.split(' ').join('');
+        }
+    </script>
 @endsection
 

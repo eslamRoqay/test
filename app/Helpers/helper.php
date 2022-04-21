@@ -1,10 +1,19 @@
-<?php
-use App\Models\Setting;
+    <?php
 
-if (!function_exists('settings')) {
-    function settings($key)
-    {
-        return Setting::where('key',$key)->first()->val;
+    use App\Models\Setting;
+
+    if (!function_exists('settings')) {
+        function settings($key)
+        {
+            return Setting::where('key', $key)->first()->val;
+        }
+    }
+
+    if (!function_exists('getFolder')) {
+        function getFolder()
+        {
+            return app()->getLocale() == 'ar' ? 'rtl.css' : 'css';
+        }
     }
 
     function msgdata($request, $status, $key, $data)
@@ -52,4 +61,4 @@ if (!function_exists('settings')) {
     {
         return 405;
     }
-}
+

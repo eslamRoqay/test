@@ -13,7 +13,6 @@ return [
     |
     */
 
-    'invaldemailorpassword'=>'',
     'accepted'        => 'يجب قبول :attribute.',
     'active_url'      => ':attribute لا يُمثّل رابطًا صحيحًا.',
     'after'           => 'يجب على :attribute أن يكون وقتا لاحقًا لوقت :date.',
@@ -150,7 +149,12 @@ return [
 
     'attributes' => [
         'name' => 'الاسم',
+        'name_ar' => 'الاسم بالعربيه',
+        'name_en' => 'الاسم بالانجليزيه',
         'f_name' => 'الاسم الاول',
+        'amount' => 'الكميه',
+        'min_order_total' => 'اقل قيمة للفاتورة',
+        'expired_at' => 'ينتهي في',
         'l_name' => 'الاسم الثاني',
         'message' => 'مضمون الرساله',
         'description' => 'الوصف',
@@ -199,12 +203,7 @@ return [
         'min_order'=>'اقل سعر',
         'city_id'=>'المدينه',
         'cover'=>'صوره الخلفيه',
-        'address'=>'العنوان',
-        'user_id'=>'اسم صاحب الدوام',
-        'pharmacy_id'=>'اسم الصيدليه',
-        'day'=>'اليوم',
-        'starts_at'=>'بدايه الدوام',
-        'ends_at'=>'نهايه الدوام',
+        'expired at'=>'ينتهي في',
     ],
 
 ];

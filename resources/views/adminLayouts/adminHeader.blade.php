@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ar" direction="rtl" dir="rtl" style="direction: rtl">
+<html lang="{{LaravelLocalization::setLocale()}}" @if(LaravelLocalization::setLocale() == 'ar') dir="rtl" style="direction: rtl" @endif>
 <!--begin::Head-->
 <head><base href="../../">
     <meta charset="utf-8" />
@@ -9,23 +9,23 @@
     <link rel="canonical" href="https://keenthemes.com/metronic" />
 
     <!--begin::Page Vendors Styles(used by this page)-->
-    <link href="{{asset('/')}}assets/plugins/custom/fullcalendar/fullcalendar.bundle.rtl.css" rel="stylesheet" type="text/css" />
-    <link href="{{asset('/')}}assets/plugins/custom/uppy/uppy.bundle.rtl.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('/')}}assets/plugins/custom/fullcalendar/fullcalendar.bundle.{{getFolder()}}" rel="stylesheet" type="text/css" />
     <!--end::Page Vendors Styles-->
     <!--begin::Global Theme Styles(used by all pages)-->
-    <link href="{{asset('/')}}assets/plugins/global/plugins.bundle.rtl.css" rel="stylesheet" type="text/css" />
-    <link href="{{asset('/')}}assets/plugins/custom/prismjs/prismjs.bundle.rtl.css" rel="stylesheet" type="text/css" />
-    <link href="{{asset('/')}}assets/css/style.bundle.rtl.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('/')}}assets/plugins/global/plugins.bundle.{{getFolder()}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('/')}}assets/plugins/custom/prismjs/prismjs.bundle.{{getFolder()}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('/')}}assets/css/style.bundle.{{getFolder()}}" rel="stylesheet" type="text/css" />
     <!--end::Global Theme Styles-->
     <!--begin::Layout Themes(used by all pages)-->
-    <link href="{{asset('/')}}assets/css/themes/layout/header/base/light.rtl.css" rel="stylesheet" type="text/css" />
-    <link href="{{asset('/')}}assets/css/themes/layout/header/menu/light.rtl.css" rel="stylesheet" type="text/css" />
-    <link href="{{asset('/')}}assets/css/themes/layout/brand/dark.rtl.css" rel="stylesheet" type="text/css" />
-    <link href="{{asset('/')}}assets/css/themes/layout/aside/dark.rtl.css" rel="stylesheet" type="text/css" />
+    <link href="{{asset('/')}}assets/css/themes/layout/header/base/light.{{getFolder()}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('/')}}assets/css/themes/layout/header/menu/light.{{getFolder()}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('/')}}assets/css/themes/layout/brand/dark.{{getFolder()}}" rel="stylesheet" type="text/css" />
+    <link href="{{asset('/')}}assets/css/themes/layout/aside/dark.{{getFolder()}}" rel="stylesheet" type="text/css" />
     <!--end::Layout Themes-->
-    <link rel="shortcut icon" href="{{asset('/')}}assets/media/logos/favicon.ico" />
+    <link rel="shortcut icon" href="{{asset('/')}}assets/media/logos/parcelweb.png" />
     <!--begin yajra datatable-->
-
+    <script src="https://cdn.datatables.net/buttons/1.0.3/js/dataTables.buttons.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.0.3/css/buttons.dataTables.min.css">
     <!--end yajra datatable-->
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100&display=swap" rel="stylesheet">
@@ -84,7 +84,7 @@
             <div class="brand flex-column-auto" id="kt_brand">
                 <!--begin::Logo-->
                 <a href="{{route('admin')}}" class="brand-logo">
-                    <img alt="Logo" style="width: 100px;" src="{{settings('logo')}}" />
+                    <img alt="Logo" style="width: 100px;" src="{{url(settings('logo'))}}" />
                 </a>
                 <!--end::Logo-->
                 <!--begin::Toggle-->
